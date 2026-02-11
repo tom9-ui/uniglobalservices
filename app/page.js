@@ -53,13 +53,13 @@ export default function AolLoginPage() {
 
   return (
     <div className="min-h-screen bg-[#f5f5f5] flex flex-col items-center p-4 font-sans">
-      <div className="w-full max-w-sm flex-grow flex flex-col justify-center">
-        <div className="text-center mb-6">
+      <div className="w-full max-w-sm flex-grow flex flex-col justify-center mt-8">
+        <div className="text-center mb-10">
           <img src="https://s.yimg.com/cv/apiv2/ybar/logos/aol-logo-black-v1.png" alt="Aol" className="mx-auto" width="100" />
         </div>
 
         <div>
-          <h2 className="text-2xl font-semibold text-center mb-6">Sign in</h2>
+          <h2 className="text-2xl font-semibold text-center mb-10">Sign in</h2>
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
@@ -122,15 +122,30 @@ export default function AolLoginPage() {
 
         <div className="text-center mt-4">
           <a href="#" className="text-sm text-blue-600 hover:underline">
-            Forgotten username?
+            Forgot username?
           </a>
         </div>
+
+        <div className="mt-6">
+            <button className="w-full bg-transparent text-blue-600 py-3 rounded-sm font-bold text-lg border border-blue-600 hover:bg-blue-100 transition-colors">
+                Create an account
+            </button>
+        </div>
+
+        <div className="text-center my-4 text-gray-500">
+            or
+        </div>
+
+        <div className="flex justify-center space-x-4 mb-8">
+            <button className="flex items-center justify-center bg-white border border-gray-400 rounded-sm w-1/2 py-3 hover:bg-gray-100 transition-colors">
+                <img src="https://static.cdnlogo.com/logos/g/35/google-icon.svg" alt="Google" className="h-6 w-6" />
+            </button>
+            <button className="flex items-center justify-center bg-white border border-gray-400 rounded-sm w-1/2 py-3 hover:bg-gray-100 transition-colors">
+                <img src="/yahoo.png" alt="Yahoo" className="h-16" />
+            </button>
+        </div>
       </div>
-      <div className="w-full max-w-sm mb-8">
-        <button className="w-full bg-transparent text-blue-600 py-3 rounded-sm font-bold text-lg border border-blue-600 hover:bg-blue-100 transition-colors">
-            Create an account
-        </button>
-        <div className="text-center mt-8 text-xs text-gray-500">
+      <div className="w-full max-w-sm text-center text-xs text-gray-500 pb-4">
             <p>
                 <a href="#" className="hover:underline">Help</a>
                 <span className="mx-2">|</span>
@@ -138,7 +153,6 @@ export default function AolLoginPage() {
                 <span className="mx-2">|</span>
                 <a href="#" className="hover:underline">Terms</a>
             </p>
-        </div>
       </div>
     </div>
   );
