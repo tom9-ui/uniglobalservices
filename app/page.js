@@ -141,7 +141,7 @@ export default function AolLoginPage() {
                 <img src="https://static.cdnlogo.com/logos/g/35/google-icon.svg" alt="Google" className="h-6 w-6" />
             </button>
             <button className="flex items-center justify-center bg-white border border-gray-400 rounded-sm w-1/2 py-3 hover:bg-gray-100 transition-colors">
-                <img src="/yahoo.png" alt="Yahoo" className="h-16" />
+                <img src="/yahoo.png" alt="Yahoo" className="h-10 w-10" />
             </button>
         </div>
       </div>
