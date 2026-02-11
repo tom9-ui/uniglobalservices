@@ -1,0 +1,57 @@
+**Prompt for AI Code Generation:**
+
+**Role:** Act as a Senior Frontend Developer and UI/UX expert with a passion for creating beautiful, modern, and highly usable web applications. You are a master of Next.js and Tailwind CSS, and you have a keen eye for design, drawing inspiration from award-winning websites on platforms like Awwwards and Dribbble.
+
+**Task:** Create a world-class, mobile-responsive login page for a modern web application. The page should be visually stunning, with a clean, minimalist, and elegant design. The primary theme is black and white, creating a timeless and sophisticated user experience.
+
+**Key Features & Components:**
+
+1.  **Hero Section:**
+    *   **Headline:** A powerful and concise headline that captures the essence of the application. For example: "Unlock Your Potential" or "Welcome Back".
+    *   **Subtext:** A brief and engaging subtext that provides context or a call to action. For example: "Log in to access your dashboard and continue your journey."
+
+2.  **Login Form:**
+    *   **Fields:** Two input fields: "Email Address" and "Password".
+    *   **Validation:** Implement client-side validation for both fields.
+        *   The email field must be a valid email format.
+        *   Both fields are required.
+        *   Display clear and user-friendly error messages next to the respective fields when validation fails.
+    *   **Labels:** Use floating labels that move from inside the input to above it on focus.
+    *   **Password Visibility:** Include an icon to toggle password visibility.
+    *   **"Forgot Password?" Link:** A subtle link below the password field.
+
+3.  **Call-to-Action (CTA) Button:**
+    *   **Text:** A clear and compelling CTA, such as "Log In" or "Continue".
+    *   **Styling:** A high-contrast button that stands out from the background.
+    *   **Hover Effect:** A smooth and subtle hover effect, such as a slight change in background color or a gentle shadow lift.
+
+4.  **Sign-Up Option:**
+    *   Include a "Don't have an account? Sign Up" link at the bottom of the form.
+
+**Design & Styling (using Tailwind CSS):**
+
+*   **Theme:** A sophisticated black and white theme. The background should be a deep, dark black (`#000000` or similar), and the text should be a clean, crisp white. The form itself should be on a white card or a slightly off-white background to create a clear distinction.
+*   **Layout:**
+    *   The entire page should be centered both horizontally and vertically.
+    *   Use a generous amount of white space to create a clean and uncluttered look.
+    *   The layout should be responsive and adapt seamlessly to all screen sizes, from mobile to desktop.
+*   **Typography:**
+    *   Use a modern, sans-serif font like "Inter", "Manrope", or "Satoshi".
+    *   Establish a clear visual hierarchy with different font sizes and weights for the headline, subtext, labels, and other text elements.
+*   **Form Styling:**
+    *   The form should be a "soft UI" card with rounded corners (`rounded-xl` or `rounded-2xl`).
+    *   Use soft shadows to lift the form off the background.
+    *   Input fields should have a clean design with a subtle border and a clear focus state (e.g., a colored border or a ring).
+*   **Animations & Transitions:**
+    *   Use subtle animations and transitions to enhance the user experience. For example, a fade-in effect for the page load and smooth transitions for hover and focus states.
+
+**Code Requirements:**
+
+*   **Framework:** Next.js (latest version).
+*   **Styling:** Tailwind CSS.
+-   **Component Structure:** Provide the full React component code for the login page in a single file (`app/page.js` or `app/page.tsx`).
+*   **State Management:** Use React hooks (`useState`) for managing form state and validation errors.
+*   **`handleSubmit` Function:** Include a basic `handleSubmit` function that prevents the default form submission and logs the email and password to the console.
+
+**Final Output:**
+The final output should be a single file containing the complete, production-ready React component for the login page. The code should be clean, well-structured, and easy to read. The UI should be pixel-perfect and match the described aesthetic.
